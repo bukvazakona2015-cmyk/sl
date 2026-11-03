@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профессиональные бухгалтерские услуги | Решение сложных задач</title>
+    <meta name="description" content="Бухгалтерские услуги для бизнеса: разблокировка счетов, оптимизация налогов, сдача отчетности. Запишитесь на консультацию.">
+    
+    <!-- Open Graph (для красивых превью ссылок в соцсетях и мессенджерах) -->
+    <meta property="og:title" content="Профессиональные бухгалтерские услуги | Сила чисел+">
+    <meta property="og:description" content="Решаем сложные бухгалтерские и налоговые задачи. Разблокируем счета, наведем порядок в отчетности.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://s6.iimage.su/s/24/gvh9AtYxkJwje8BQl5UyYrEaJ4BluOIIypBpvktFu.jpg">
+
+    <!-- Встроенная SVG-фавиконка (безопасный URL-encoded формат) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3000f'/%3E%3Ccircle cx='50' cy='25' r='12' fill='white'/%3E%3Crect x='15' y='42' width='70' height='16' fill='white'/%3E%3Ccircle cx='50' cy='75' r='12' fill='white'/%3E%3C/svg%3E">
+
+    <style>
+        /* === Базовые настройки и переменные === */
+        :root {
+            /* Цветовая палитра */
+            --color-1: #00030E; /* Самый темный (почти черный с синим отливом) */
+            --color-2: #0B0E1A;
+            --color-3: #2C1B2F; /* Глубокий баклажановый */
+            --color-4: #5E3A5C; /* Приглушенный фиолетовый */
+            --color-5: #B47A9A; /* Пыльно-розовый / лиловый */
+            --color-6: #F3E9EC; /* Самый светлый (пудровый офф-вайт) */
+
+            --logo-red: #e3000f; /* Красный для логотипа из исходника */
+
+            --primary-color: var(--color-3); 
+            --primary-hover: var(--color-4); 
+            --accent-color: var(--color-5); 
+            --accent-hover: var(--color-2); 
+            --bg-light: var(--color-6);
+            
+            --text-main: var(--color-1); 
+            --text-muted: var(--color-4);
+            --white: #ffffff;
+            --danger: #d31225; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Системные шрифты для максимальной скорости */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        /* Утилиты */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        /* === Кнопки === */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--color-6);
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+            text-align: center;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .btn:hover { background-color: var(--primary-hover); color: var(--white); }
+        .btn:active { transform: translateY(2px); }
+
+        /* === Шапка === */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* === Логотип === */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background-color: var(--logo-red);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            border-radius: 4px;
+        }
+        .logo-icon .dot { width: 8px; height: 8px; background-color: var(--white); border-radius: 50%; }
+        .logo-icon .line { width: 28px; height: 5px; background-color: var(--white); }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--text-main);
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+        .logo-text span.sub { font-weight: 500; font-size: 1.2rem; text-transform: lowercase; }
+        .logo-text span.plus { color: var(--logo-red); font-weight: 900; }
+
+        /* === Главный экран (Hero) === */
+        .hero {
+            background: linear-gradient(135deg, var(--color-6) 0%, var(--white) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .hero-text { flex: 1; text-align: left; }
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--primary-color);
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+        .hero-image { flex: 1; display: flex; justify-content: center; }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(11, 14, 26, 0.15);
+        }
+
+        /* === Блок проблем === */
+        .problems {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .problem-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+        }
+        .problem-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* === Блок с видео === */
+        .video-section {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+
+        /* === Партнеры === */
+        .partners {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+            overflow: hidden;
+        }
+        .partners .section-title { margin-bottom: 2rem; }
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            gap: 15px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .carousel-btn {
+            background-color: var(--primary-color);
+            color: var(--bg-light);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.2s;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+        .carousel-btn:hover { background-color: var(--primary-hover); color: var(--white); transform: scale(1.05); }
+        .partners-carousel-wrapper {
+            width: 700px;
+            overflow: hidden;
+            padding: 15px 5px;
+        }
+        .partners-carousel-track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        .partners-carousel-track::-webkit-scrollbar { display: none; }
+        .partner-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 220px;
+            height: 100px;
+            background-color: #ffffff !important;
+            border-radius: 8px;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .partner-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .partner-logo {
+            max-width: 180px;
+            max-height: 75px;
+            object-fit: contain;
+        }
+
+        /* === Форма записи === */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--white);
+            color: var(--text-main);
+        }
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            color: var(--text-main);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .form-control:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(44, 27, 47, 0.1); }
+        textarea.form-control { resize: vertical; min-height: 100px; }
+        .error-message { color: var(--danger); font-size: 0.875rem; margin-top: 5px; display: none; }
+        .form-control.invalid { border-color: var(--danger); }
+        .form-wrapper .btn { width: 100%; margin-top: 10px; }
+        .success-message { display: none; text-align: center; color: #10b981; font-weight: bold; font-size: 1.1rem; margin-top: 20px; }
+
+        /* === Подвал === */
+        footer {
+            background-color: var(--color-1);
+            color: var(--color-6);
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer p { margin-bottom: 10px; }
+        footer a { color: var(--white); font-weight: bold; }
+
+        /* === Адаптивность === */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column; text-align: center; }
+            .partners-carousel-wrapper { width: 100%; }
+            .hero-text { text-align: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .hero { padding: 40px 0; }
+            .form-wrapper { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo-wrapper">
+                <div class="logo-icon">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="logo-text">Сила<br><span class="sub">чисел</span><span class="plus">+</span></div>
+            </a>
+            <a href="https://t.me/Silachisel_Ip" target="_blank" rel="noopener noreferrer" class="btn">Оставить заявку</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Надежная защита вашего бизнеса</h1>
+                <p>Решаем сложные бухгалтерские и налоговые задачи. Разблокируем счета, наведем порядок в отчетности и защитим от штрафов.</p>
+                <a href="https://t.me/Silachisel_Ip" target="_blank" rel="noopener noreferrer" class="btn">Записаться на консультацию</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://s6.iimage.su/s/24/gvh9AtYxkJwje8BQl5UyYrEaJ4BluOIIypBpvktFu.jpg" alt="Главный бухгалтер">
+            </div>
+        </div>
+    </section>
+
+    <section class="problems" id="problems">
+        <div class="container">
+            <h2 class="section-title">С какими проблемами мы помогаем?</h2>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <h3>Блокировка счета (115-ФЗ)</h3>
+                    <p>Банк заморозил операции и требует документы? Поможем оперативно собрать нужный пакет и доказать легальность бизнеса для снятия ограничений.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Налоговые проверки и требования</h3>
+                    <p>Получили требование из ФНС или акт проверки с огромными доначислениями? Подготовим грамотный ответ и оспорим незаконные штрафы.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Запущенная отчетность</h3>
+                    <p>Предыдущий бухгалтер пропал, а сроки горят? Проведем экспресс-аудит, восстановим учет и сдадим все декларации вовремя.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="container">
+            <h2 class="section-title">Как мы решаем задачи</h2>
+            <div class="video-container">
+                <div style="position: relative; padding-top: 56.25%; width: 100%">
+                    <iframe src="https://kinescope.io/embed/icEFMPfnFSTUKgEnPtyha5" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners">
+        <div class="container">
+            <h2 class="section-title">Наши партнеры</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn" id="prevPartner" aria-label="Назад">❮</button>
+                <div class="partners-carousel-wrapper">
+                    <div class="partners-carousel-track" id="partnersTrack">
+                        <a href="#" class="partner-item">
+                            <img src="https://www.architect-design.ru/upload/iblock/ec2/sjkq7zcgdtycrbq0jgx6ibo3w0e1cuoz.jpg" alt="Сбербанк" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Сбербанк'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=528828d5ef894f784e2bb88ac7076f4bc0becc40-5885431-images-thumbs&n=13" alt="Лого 2" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Лого+2'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=98caf8aa50a682d5ce6610d3807b97264c50f836-4432897-images-thumbs&n=13" alt="Лого 3" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Лого+3'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=a53567f5ccf168fff099fd04d64c7856_l-5026463-images-thumbs&n=13" alt="Лого 4" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Лого+4'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=233912d6e6c48d661341b1b23ad69ebb2790d3c5-5108951-images-thumbs&n=13" alt="1C Cloud" class="partner-logo" style="transform: scale(1.35);" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=1C+Cloud'">
+                        </a>
+                    </div>
+                </div>
+                <button class="carousel-btn" id="nextPartner" aria-label="Вперед">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Запишитесь на консультацию</h2>
+            <div class="form-wrapper">
+                <!-- Для работы формы на GitHub Pages рекомендуем использовать бесплатный сервис formspree.io -->
+                <!-- Замените тег <form> ниже на: <form action="https://formspree.io/f/ВАШ_КОД" method="POST" id="consultationForm" novalidate> -->
+                <form id="consultationForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" class="form-control" required placeholder="Иван Иванов">
+                        <div class="error-message" id="nameError">Пожалуйста, введите ваше имя.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Номер телефона *</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="+7 (999) 000-00-00">
+                        <div class="error-message" id="phoneError">Пожалуйста, введите корректный номер.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="problem">Опишите вашу проблему</label>
+                        <textarea id="problem" name="problem" class="form-control" placeholder="Например: Заблокировали счет в банке..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn" id="submitBtn">Отправить заявку</button>
+                    <div class="success-message" id="successMsg">Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в течение 15 минут.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Телефон: <a href="tel:+79267197518">+7 (926) 719-75-18</a> | Telegram: <a href="https://t.me/Silachisel_Ip" target="_blank" rel="noopener noreferrer">@Silachisel_Ip</a></p>
+            <p>г. Щелково, ул. Советская, д. 16/2, этаж 5, офис 504 (вход со двора)</p>
+            <p style="margin-top: 20px; font-size: 0.85rem;">© 2026 Сила чисел+. Все права защищены. Обработка данных осуществляется в соответствии с политикой конфиденциальности.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Плавный скролл для якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Функция предотвращения XSS
+            function sanitizeHTML(str) {
+                return str.replace(/[^\w. ]/gi, function (c) {
+                    return '&#' + c.charCodeAt(0) + ';';
+                });
+            }
+
+            // Валидация формы
+            const form = document.getElementById('consultationForm');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const problemInput = document.getElementById('problem');
+            const successMsg = document.getElementById('successMsg');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', function(e) {
+                // Если подключите Formspree, удалите строку e.preventDefault(); чтобы форма реально отправлялась
+                e.preventDefault(); 
+                let isValid = true;
+
+                nameInput.classList.remove('invalid');
+                phoneInput.classList.remove('invalid');
+                document.getElementById('nameError').style.display = 'none';
+                document.getElementById('phoneError').style.display = 'none';
+
+                if (nameInput.value.trim().length < 2) {
+                    nameInput.classList.add('invalid');
+                    document.getElementById('nameError').style.display = 'block';
+                    isValid = false;
+                }
+
+                const phonePattern = /^[+\d\s()-]{10,20}$/;
+                if (!phonePattern.test(phoneInput.value.trim())) {
+                    phoneInput.classList.add('invalid');
+                    document.getElementById('phoneError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    const cleanName = sanitizeHTML(nameInput.value);
+                    const cleanPhone = sanitizeHTML(phoneInput.value);
+                    const cleanProblem = sanitizeHTML(problemInput.value);
+                    
+                    submitBtn.style.display = 'none';
+                    successMsg.style.display = 'block';
+                    form.reset();
+
+                    setTimeout(() => {
+                        submitBtn.style.display = 'block';
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // Карусель партнеров
+            const track = document.getElementById('partnersTrack');
+            const prevBtn = document.getElementById('prevPartner');
+            const nextBtn = document.getElementById('nextPartner');
+            
+            if (track && prevBtn && nextBtn) {
+                const scrollAmount = 240; 
+                
+                nextBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+                
+                prevBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
