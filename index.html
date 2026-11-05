@@ -2,393 +2,558 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Главный бухгалтер на аутсорсе</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] }
-                }
-            }
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профессиональные бухгалтерские услуги | Решение сложных задач</title>
+    <meta name="description" content="Бухгалтерские услуги для бизнеса: разблокировка счетов, оптимизация налогов, сдача отчетности. Запишитесь на консультацию.">
+    
+    <!-- Open Graph (для красивых превью ссылок в соцсетях и мессенджерах) -->
+    <meta property="og:title" content="Профессиональные бухгалтерские услуги | Сила чисел+">
+    <meta property="og:description" content="Решаем сложные бухгалтерские и налоговые задачи. Разблокируем счета, наведем порядок в отчетности.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://s6.iimage.su/s/24/gvh9AtYxkJwje8BQl5UyYrEaJ4BluOIIypBpvktFu.jpg">
+
+    <!-- Встроенная SVG-фавиконка (безопасный URL-encoded формат) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3000f'/%3E%3Ccircle cx='50' cy='25' r='12' fill='white'/%3E%3Crect x='15' y='42' width='70' height='16' fill='white'/%3E%3Ccircle cx='50' cy='75' r='12' fill='white'/%3E%3C/svg%3E">
+
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Кастомный переключатель (Toggle) */
-        .switch { position: relative; display: inline-block; width: 52px; height: 30px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #4b5563; transition: .4s; border-radius: 34px; border: 2px solid transparent; }
-        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        input:checked + .slider { background-color: #ef4444; }
-        input:checked + .slider:before { transform: translateX(22px); }
+        /* === Базовые настройки и переменные === */
+        :root {
+            /* Цветовая палитра */
+            --color-1: #00030E; /* Самый темный (почти черный с синим отливом) */
+            --color-2: #0B0E1A;
+            --color-3: #2C1B2F; /* Глубокий баклажановый */
+            --color-4: #5E3A5C; /* Приглушенный фиолетовый */
+            --color-5: #B47A9A; /* Пыльно-розовый / лиловый */
+            --color-6: #F3E9EC; /* Самый светлый (пудровый офф-вайт) */
+
+            --logo-red: #e3000f; /* Красный для логотипа из исходника */
+
+            --primary-color: var(--color-3); 
+            --primary-hover: var(--color-4); 
+            --accent-color: var(--color-5); 
+            --accent-hover: var(--color-2); 
+            --bg-light: var(--color-6);
+            
+            --text-main: var(--color-1); 
+            --text-muted: var(--color-4);
+            --white: #ffffff;
+            --danger: #d31225; 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Системные шрифты для максимальной скорости */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
         
-        .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(10px); } 
-            to { opacity: 1; transform: translateY(0); } 
+        /* Утилиты */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        /* === Кнопки === */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--color-6);
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+            text-align: center;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .btn:hover { background-color: var(--primary-hover); color: var(--white); }
+        .btn:active { transform: translateY(2px); }
+
+        /* === Шапка === */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* === Логотип === */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background-color: var(--logo-red);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            border-radius: 4px;
+        }
+        .logo-icon .dot { width: 8px; height: 8px; background-color: var(--white); border-radius: 50%; }
+        .logo-icon .line { width: 28px; height: 5px; background-color: var(--white); }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--text-main);
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+        .logo-text span.sub { font-weight: 500; font-size: 1.2rem; text-transform: lowercase; }
+        .logo-text span.plus { color: var(--logo-red); font-weight: 900; }
+
+        /* === Главный экран (Hero) === */
+        .hero {
+            background: linear-gradient(135deg, var(--color-6) 0%, var(--white) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .hero-text { flex: 1; text-align: left; }
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--primary-color);
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+        .hero-image { flex: 1; display: flex; justify-content: center; }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(11, 14, 26, 0.15);
+        }
+
+        /* === Блок проблем === */
+        .problems {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .problem-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+        }
+        .problem-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* === Блок с видео === */
+        .video-section {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        .video-container {
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+
+        /* === Партнеры === */
+        .partners {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+            overflow: hidden;
+        }
+        .partners .section-title { margin-bottom: 2rem; }
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            gap: 15px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .carousel-btn {
+            background-color: var(--primary-color);
+            color: var(--bg-light);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.2s;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+        .carousel-btn:hover { background-color: var(--primary-hover); color: var(--white); transform: scale(1.05); }
+        .partners-carousel-wrapper {
+            width: 700px;
+            overflow: hidden;
+            padding: 15px 5px;
+        }
+        .partners-carousel-track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        .partners-carousel-track::-webkit-scrollbar { display: none; }
+        .partner-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 220px;
+            height: 100px;
+            background-color: #ffffff !important;
+            border-radius: 8px;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .partner-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .partner-logo {
+            max-width: 180px;
+            max-height: 75px;
+            object-fit: contain;
+        }
+
+        /* === Форма записи === */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--white);
+            color: var(--text-main);
+        }
+        .form-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            color: var(--text-main);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .form-control:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(44, 27, 47, 0.1); }
+        textarea.form-control { resize: vertical; min-height: 100px; }
+        .error-message { color: var(--danger); font-size: 0.875rem; margin-top: 5px; display: none; }
+        .form-control.invalid { border-color: var(--danger); }
+        .form-wrapper .btn { width: 100%; margin-top: 10px; }
+        .success-message { display: none; text-align: center; color: #10b981; font-weight: bold; font-size: 1.1rem; margin-top: 20px; }
+
+        /* === Подвал === */
+        footer {
+            background-color: var(--color-1);
+            color: var(--color-6);
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer p { margin-bottom: 10px; }
+        footer a { color: var(--white); font-weight: bold; }
+
+        /* === Адаптивность === */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column; text-align: center; }
+            .partners-carousel-wrapper { width: 100%; }
+            .hero-text { text-align: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .hero { padding: 40px 0; }
+            .form-wrapper { padding: 25px; }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased selection:bg-blue-200">
+<body>
 
-    <!-- Hero Section / Header -->
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div class="text-xl sm:text-2xl font-extrabold text-blue-600 tracking-tight">Бухгалтерия без риска</div>
-            <a href="https://t.me/Silachisel_Ip" target="_blank" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition duration-200 text-sm shadow-md hover:shadow-lg">
-                Написать в Telegram
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo-wrapper">
+                <div class="logo-icon">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="logo-text">Сила<br><span class="sub">чисел</span><span class="plus">+</span></div>
             </a>
+            <a href="https://t.me/Silachisel_Ip" target="_blank" rel="noopener noreferrer" class="btn">Оставить заявку</a>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-8 md:py-16 space-y-16 md:space-y-24">
-        
-        <!-- Intro -->
-        <section class="text-center max-w-4xl mx-auto">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-gray-900">
-                Ваш учет работает на вас или <span class="text-red-500">против вас?</span>
-            </h1>
-            <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-                Цифровой контроль ФНС стал глубже и точнее. Ошибки находят быстрее, а их последствия обходятся дороже. Мы забираем риски на себя и делаем бухгалтерию инструментом роста, а не источником проблем.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row justify-center gap-4 text-left">
-                <div class="bg-red-50 p-5 sm:p-6 rounded-2xl border border-red-100 flex-1 shadow-sm">
-                    <div class="text-red-600 font-bold mb-3 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        Частые проблемы:
-                    </div>
-                    <ul class="text-sm sm:text-base text-gray-700 space-y-2">
-                        <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">•</span> Штрафы и требования от налоговой</li>
-                        <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">•</span> Заблокировали счет</li>
-                    </ul>
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Надежная защита вашего бизнеса</h1>
+                <p>Решаем сложные бухгалтерские и налоговые задачи. Разблокируем счета, наведем порядок в отчетности и защитим от штрафов.</p>
+                <a href="https://t.me/Silachisel_Ip" target="_blank" rel="noopener noreferrer" class="btn">Записаться на консультацию</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://s6.iimage.su/s/24/gvh9AtYxkJwje8BQl5UyYrEaJ4BluOIIypBpvktFu.jpg" alt="Главный бухгалтер">
+            </div>
+        </div>
+    </section>
+
+    <section class="problems" id="problems">
+        <div class="container">
+            <h2 class="section-title">С какими проблемами мы помогаем?</h2>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <h3>Блокировка счета (115-ФЗ)</h3>
+                    <p>Банк заморозил операции и требует документы? Поможем оперативно собрать нужный пакет и доказать легальность бизнеса для снятия ограничений.</p>
                 </div>
-                <div class="bg-green-50 p-5 sm:p-6 rounded-2xl border border-green-100 flex-1 shadow-sm">
-                    <div class="text-green-600 font-bold mb-3 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Наше решение:
-                    </div>
-                    <ul class="text-sm sm:text-base text-gray-700 space-y-2">
-                        <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">•</span> Материальная ответственность по договору</li>
-                        <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">•</span> Превентивный мониторинг рисков</li>
-                    </ul>
+                <div class="problem-card">
+                    <h3>Налоговые проверки и требования</h3>
+                    <p>Получили требование из ФНС или акт проверки с огромными доначислениями? Подготовим грамотный ответ и оспорим незаконные штрафы.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Запущенная отчетность</h3>
+                    <p>Предыдущий бухгалтер пропал, а сроки горят? Проведем экспресс-аудит, восстановим учет и сдадим все декларации вовремя.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Quiz Section -->
-        <section class="bg-white p-6 sm:p-8 md:p-12 rounded-[2rem] shadow-sm border border-gray-100">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900">Проверьте здоровье вашего учета за 40 секунд</h2>
-            
-            <div id="quiz-container" class="max-w-3xl mx-auto">
-                <div class="space-y-4" id="quiz-questions">
-                    <!-- Вопрос 1 -->
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-5 bg-gray-50 rounded-xl border border-gray-100 gap-4 transition-colors hover:border-blue-100">
-                        <span class="font-medium text-gray-800 text-base sm:text-lg">Была ли задержка со сдачей деклараций?</span>
-                        <div class="flex w-full sm:w-auto gap-2">
-                            <button onclick="answerQuiz(0, true, this)" class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-gray-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 font-medium transition-all">Да</button>
-                            <button onclick="answerQuiz(0, false, this)" class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-gray-200 hover:bg-green-50 hover:border-green-200 hover:text-green-700 font-medium transition-all">Нет</button>
-                        </div>
-                    </div>
-                    <!-- Вопрос 2 -->
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-5 bg-gray-50 rounded-xl border border-gray-100 gap-4 transition-colors hover:border-blue-100">
-                        <span class="font-medium text-gray-800 text-base sm:text-lg">Была ли блокировка счета?</span>
-                        <div class="flex w-full sm:w-auto gap-2">
-                            <button onclick="answerQuiz(1, true, this)" class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-gray-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 font-medium transition-all">Да</button>
-                            <button onclick="answerQuiz(1, false, this)" class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-gray-200 hover:bg-green-50 hover:border-green-200 hover:text-green-700 font-medium transition-all">Нет</button>
-                        </div>
-                    </div>
-                    <!-- Вопрос 3 -->
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-5 bg-gray-50 rounded-xl border border-gray-100 gap-4 transition-colors hover:border-blue-100">
-                        <span class="font-medium text-gray-800 text-base sm:text-lg">Знаете точную себестоимость своего товара или услуг?</span>
-                        <div class="flex w-full sm:w-auto gap-2">
-                            <button onclick="answerQuiz(2, false, this)" class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-gray-200 hover:bg-green-50 hover:border-green-200 hover:text-green-700 font-medium transition-all">Да</button>
-                            <button onclick="answerQuiz(2, true, this)" class="flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-gray-200 hover:bg-red-50 hover:border-red-200 hover:text-red-700 font-medium transition-all">Нет</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-10 text-center">
-                    <button onclick="calculateQuiz()" class="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 w-full sm:w-auto min-w-[250px] text-lg">
-                        Узнать результат
-                    </button>
-                </div>
-
-                <div id="quiz-result" class="hidden mt-8 p-6 sm:p-8 rounded-2xl text-center">
-                    <!-- Результат подставится через JS -->
-                </div>
+    <section class="video-section">
+        <div class="container">
+            <h2 class="section-title">Как мы решаем задачи</h2>
+            <div class="video-container">
+                <div style="position: relative; padding-top: 175.42%; width: 100%"><iframe src="https://kinescope.io/embed/vaKc7xMMcv8DQPPt7wL2Sy" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Hidden Losses Calculator -->
-        <section class="bg-gray-900 text-white p-6 sm:p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden">
-            <!-- Decorative background elements -->
-            <div class="absolute top-0 right-0 w-64 h-64 bg-red-500 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 pointer-events-none"></div>
-            
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 text-center relative z-10">Калькулятор скрытых потерь</h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 relative z-10">
-                <div class="space-y-6">
-                    <p class="text-gray-400 text-sm uppercase tracking-wider font-semibold mb-4">Отметьте то, что случалось в вашем бизнесе:</p>
+    <section class="partners">
+        <div class="container">
+            <h2 class="section-title">Наши партнеры</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn" id="prevPartner" aria-label="Назад">❮</button>
+                <div class="partners-carousel-wrapper">
+                    <div class="partners-carousel-track" id="partnersTrack">
+                        <a href="#" class="partner-item">
+                            <img src="https://www.architect-design.ru/upload/iblock/ec2/sjkq7zcgdtycrbq0jgx6ibo3w0e1cuoz.jpg" alt="Сбербанк" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Сбербанк'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=528828d5ef894f784e2bb88ac7076f4bc0becc40-5885431-images-thumbs&n=13" alt="Лого 2" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Лого+2'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=98caf8aa50a682d5ce6610d3807b97264c50f836-4432897-images-thumbs&n=13" alt="Лого 3" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Лого+3'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=a53567f5ccf168fff099fd04d64c7856_l-5026463-images-thumbs&n=13" alt="Лого 4" class="partner-logo" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=Лого+4'">
+                        </a>
+                        <a href="#" class="partner-item">
+                            <img src="https://avatars.mds.yandex.net/i?id=233912d6e6c48d661341b1b23ad69ebb2790d3c5-5108951-images-thumbs&n=13" alt="1C Cloud" class="partner-logo" style="transform: scale(1.35);" onerror="this.src='https://placehold.co/140x50/transparent/2C1B2F?text=1C+Cloud'">
+                        </a>
+                    </div>
+                </div>
+                <button class="carousel-btn" id="nextPartner" aria-label="Вперед">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Запишитесь на консультацию</h2>
+            <div class="form-wrapper">
+                <!-- Для работы формы на GitHub Pages рекомендуем использовать бесплатный сервис formspree.io -->
+                <!-- Замените тег <form> ниже на: <form action="https://formspree.io/f/ВАШ_КОД" method="POST" id="consultationForm" novalidate> -->
+                <form id="consultationForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" class="form-control" required placeholder="Иван Иванов">
+                        <div class="error-message" id="nameError">Пожалуйста, введите ваше имя.</div>
+                    </div>
                     
-                    <!-- Toggle 1 -->
-                    <label class="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gray-800/80 p-5 rounded-2xl border border-gray-700 hover:border-gray-500 transition-colors cursor-pointer">
-                        <div class="switch mt-1 sm:mt-0 flex-shrink-0">
-                            <input type="checkbox" onchange="updateLosses(this, 150000)">
-                            <span class="slider"></span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg text-gray-100">Блокировка счета</div>
-                            <p class="text-sm text-gray-400 mt-1 leading-relaxed"><strong class="text-gray-300">Расчет потерь:</strong> Простой бизнеса обходится в среднем от 150 000 ₽ в день из-за сорванных контрактов и неустоек.</p>
-                            <p class="text-sm text-green-400 mt-2 font-medium">✓ Что приобретаете с нами: превентивный мониторинг рисков, счета работают без перебоев.</p>
-                        </div>
-                    </label>
+                    <div class="form-group">
+                        <label for="phone">Номер телефона *</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="+7 (999) 000-00-00">
+                        <div class="error-message" id="phoneError">Пожалуйста, введите корректный номер.</div>
+                    </div>
 
-                    <!-- Toggle 2 -->
-                    <label class="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gray-800/80 p-5 rounded-2xl border border-gray-700 hover:border-gray-500 transition-colors cursor-pointer">
-                        <div class="switch mt-1 sm:mt-0 flex-shrink-0">
-                            <input type="checkbox" onchange="updateLosses(this, 300000)">
-                            <span class="slider"></span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg text-gray-100">Учет без оптимизации</div>
-                            <p class="text-sm text-gray-400 mt-1 leading-relaxed"><strong class="text-gray-300">Расчет потерь:</strong> Переплата до 300 000 ₽ в год из-за незнания льгот и неумения применять спецрежимы.</p>
-                            <p class="text-sm text-green-400 mt-2 font-medium">✓ Что приобретаете с нами: 100% законная экономия, регулярный подбор выгодных налоговых схем.</p>
-                        </div>
-                    </label>
+                    <div class="form-group">
+                        <label for="problem">Опишите вашу проблему</label>
+                        <textarea id="problem" name="problem" class="form-control" placeholder="Например: Заблокировали счет в банке..."></textarea>
+                    </div>
 
-                    <!-- Toggle 3 -->
-                    <label class="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gray-800/80 p-5 rounded-2xl border border-gray-700 hover:border-gray-500 transition-colors cursor-pointer">
-                        <div class="switch mt-1 sm:mt-0 flex-shrink-0">
-                            <input type="checkbox" onchange="updateLosses(this, 50000)">
-                            <span class="slider"></span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg text-gray-100">Пени и штрафы от ФНС</div>
-                            <p class="text-sm text-gray-400 mt-1 leading-relaxed"><strong class="text-gray-300">Расчет потерь:</strong> Минимум 50 000 ₽ потерь на мелких ошибках, неверных декларациях и опозданиях со сдачей.</p>
-                            <p class="text-sm text-green-400 mt-2 font-medium">✓ Что приобретаете с нами: полную материальную ответственность за ошибки мы закрепляем в договоре.</p>
-                        </div>
-                    </label>
-                </div>
-
-                <div class="flex flex-col justify-center items-center bg-gray-800/50 p-8 sm:p-10 rounded-3xl border border-red-500/30 shadow-[0_0_40px_rgba(239,68,68,0.1)]">
-                    <div class="text-gray-400 mb-3 font-medium uppercase tracking-wide text-sm text-center">Примерные невидимые убытки за год:</div>
-                    <div class="text-5xl sm:text-6xl lg:text-7xl font-black text-red-500 mb-6 text-center break-words w-full" id="total-losses">0 ₽</div>
-                    <p class="text-sm sm:text-base text-gray-400 text-center max-w-sm leading-relaxed">Плохой учет обходится гораздо дороже, чем качественный аутсорс с полной материальной ответственностью.</p>
-                </div>
+                    <button type="submit" class="btn" id="submitBtn">Отправить заявку</button>
+                    <div class="success-message" id="successMsg">Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в течение 15 минут.</div>
+                </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Staff Overpayment Calculator -->
-        <section class="bg-white p-6 sm:p-8 md:p-12 rounded-[2rem] shadow-sm border border-gray-100">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center text-gray-900">Переплата за штат</h2>
-            <p class="text-center text-gray-500 mb-10 text-base sm:text-lg">Сравните расходы на штатного сотрудника и аутсорсинг.</p>
-            
-            <div class="max-w-4xl mx-auto space-y-8">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between bg-gray-50 p-5 sm:p-6 rounded-2xl border border-gray-100 shadow-inner">
-                    <span class="font-semibold text-gray-700 text-lg">Зарплата вашего бухгалтера на руки (в месяц):</span>
-                    <div class="relative w-full sm:w-auto">
-                        <input type="number" id="salary-input" value="60000" class="border-2 border-gray-200 rounded-xl pl-4 pr-10 py-3 w-full sm:w-56 text-right font-bold text-lg text-gray-900 focus:border-blue-500 focus:ring-0 outline-none transition-colors" oninput="calculateStaff()">
-                        <span class="absolute right-4 top-1/2 transform -translate-y-1/2 font-bold text-gray-400">₽</span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Расходы на штат -->
-                    <div class="bg-red-50/50 p-6 sm:p-8 rounded-2xl border border-red-100 h-full flex flex-col">
-                        <h3 class="font-bold text-xl mb-6 text-red-800 flex items-center gap-2">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Расходы на штат
-                        </h3>
-                        <ul class="space-y-3 text-sm sm:text-base text-gray-700 flex-grow">
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Оклад:</span> <span id="val-salary" class="font-bold text-gray-900">100 000 ₽</span></li>
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Налоги и взносы (43%):</span> <span id="val-taxes" class="font-bold text-gray-900">43 000 ₽</span></li>
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Скрытые расходы (1С, СПС, интернет):</span> <span class="font-bold text-gray-900">15 000 ₽</span></li>
-                        </ul>
-                        <div class="border-t border-red-200 pt-4 mt-6 flex justify-between items-center text-red-700 font-black text-lg sm:text-xl">
-                            <span>Итого в месяц:</span> <span id="val-total-staff">158 000 ₽</span>
-                        </div>
-                    </div>
-
-                    <!-- Расходы на аутсорс -->
-                    <div class="bg-blue-50/50 p-6 sm:p-8 rounded-2xl border border-blue-100 h-full flex flex-col">
-                        <h3 class="font-bold text-xl mb-6 text-blue-800 flex items-center gap-2">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Расходы на аутсорс
-                        </h3>
-                        <ul class="space-y-3 text-sm sm:text-base text-gray-700 flex-grow">
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Комплексное обслуживание:</span> <span id="val-outsource-base" class="font-bold text-gray-900">30 000 ₽</span></li>
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Налоги с ФОТ бухгалтера:</span> <span class="font-bold text-gray-900">0 ₽</span></li>
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Доступ к 1С и СПС:</span> <span class="font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded text-xs uppercase tracking-wider">Включено</span></li>
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Отпускные и больничные:</span> <span class="font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded text-xs uppercase tracking-wider">Не требуются</span></li>
-                            <li class="flex justify-between items-center"><span class="text-gray-600">Гарантия результата:</span> <span class="font-bold text-green-600">по договору</span></li>
-                        </ul>
-                        <div class="border-t border-blue-200 pt-4 mt-6 flex justify-between items-center text-blue-700 font-black text-lg sm:text-xl">
-                            <span>Итого в месяц:</span> <span id="val-total-outsource">30 000 ₽</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center pt-6">
-                    <div class="inline-block bg-green-50 border border-green-200 text-green-800 px-8 py-4 rounded-2xl font-bold text-lg sm:text-xl md:text-2xl shadow-sm">
-                        Ваша экономия в год: <span id="val-saving" class="text-green-600 font-black ml-2">837 600 ₽</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Expert CTA (Без фото) -->
-        <section class="text-center pb-16 pt-8">
-            <h2 class="text-2xl sm:text-3xl font-extrabold mb-3 text-gray-900">Щербакова Татьяна</h2>
-            <p class="text-base sm:text-lg text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed px-4">
-                Главный бухгалтер. Наведу порядок в ваших финансах, защищу от штрафов и помогу легально платить меньше налогов.
-            </p>
-            
-            <a href="https://t.me/Silachisel_Ip" target="_blank" class="inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl shadow-[0_10px_20px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_30px_rgba(37,99,235,0.4)] transition-all transform hover:-translate-y-1 w-full sm:w-auto mx-4 sm:mx-0">
-                Обсудить задачу в Telegram
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></svg>
-            </a>
-        </section>
-
-    </main>
-
-    <footer class="bg-gray-900 text-gray-500 py-8 text-center text-sm border-t border-gray-800">
-        <p>© 2026 Бухгалтерский аутсорсинг. Все права защищены.</p>
+    <footer>
+        <div class="container">
+            <p>Телефон: <a href="tel:+79267197518">+7 (926) 719-75-18</a> | Telegram: <a href="https://t.me/Silachisel_Ip" target="_blank" rel="noopener noreferrer">@Silachisel_Ip</a></p>
+            <p>г. Щелково, ул. Советская, д. 16/2, этаж 5, офис 504 (вход со двора)</p>
+            <p style="margin-top: 20px; font-size: 0.85rem;">© 2026 Сила чисел+. Все права защищены. Обработка данных осуществляется в соответствии с политикой конфиденциальности.</p>
+        </div>
     </footer>
 
     <script>
-        // Quiz Logic
-        let quizAnswers = [null, null, null];
-        
-        function answerQuiz(index, isRisk, btnElement) {
-            quizAnswers[index] = isRisk;
-            
-            // Находим родительский контейнер кнопок и сбрасываем стили у обеих кнопок
-            const container = btnElement.parentElement;
-            const buttons = container.querySelectorAll('button');
-            buttons.forEach(btn => {
-                // Возвращаем дефолтные стили
-                btn.className = "flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-gray-200 hover:bg-gray-50 font-medium transition-all text-gray-900";
-            });
-            
-            // Добавляем активные стили выбранной кнопке
-            btnElement.className = "flex-1 sm:flex-none px-8 py-2.5 rounded-lg border-2 border-blue-500 bg-blue-50 text-blue-700 font-bold transition-all shadow-sm";
-        }
-
-        function calculateQuiz() {
-            if(quizAnswers.includes(null)) {
-                alert('Пожалуйста, ответьте на все вопросы, чтобы получить точный результат.');
-                return;
-            }
-
-            const hasRisk = quizAnswers.includes(true);
-            const resultDiv = document.getElementById('quiz-result');
-            resultDiv.className = 'mt-8 p-6 sm:p-8 rounded-2xl text-center fade-in'; // Reset classes
-
-            if(hasRisk) {
-                resultDiv.classList.add('bg-red-50', 'border', 'border-red-200', 'text-red-900');
-                resultDiv.innerHTML = `
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-600 mb-4">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    </div>
-                    <div class="text-2xl font-bold mb-3">Обнаружены зоны риска</div>
-                    <p class="text-red-700 max-w-lg mx-auto">Ваша текущая бухгалтерия может привести к финансовым потерям. Изучите калькулятор скрытых потерь ниже, чтобы увидеть реальные цифры.</p>
-                `;
-            } else {
-                resultDiv.classList.add('bg-green-50', 'border', 'border-green-200', 'text-green-900');
-                resultDiv.innerHTML = `
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <div class="text-2xl font-bold mb-3">Учет в порядке!</div>
-                    <p class="text-green-700 max-w-lg mx-auto">Штрафы вам не грозят. Но уверены ли вы, что не переплачиваете за содержание штата? Проверьте финансовую выгоду в калькуляторе ниже.</p>
-                `;
-            }
-        }
-
-        // Losses Logic
-        let currentLosses = 0;
-        function updateLosses(checkbox, amount) {
-            const targetElement = document.getElementById('total-losses');
-            let start = currentLosses;
-            currentLosses = checkbox.checked ? currentLosses + amount : currentLosses - amount;
-            
-            animateValue(targetElement, start, currentLosses, 600);
-            
-            // UI Color update for extreme losses
-            if(currentLosses > 0) {
-                targetElement.classList.add('text-red-500');
-                targetElement.classList.remove('text-gray-500');
-            } else {
-                targetElement.classList.remove('text-red-500');
-                targetElement.classList.add('text-gray-500');
-            }
-        }
-
-        function animateValue(obj, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                // easing out
-                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                const currentVal = Math.floor(easeOutQuart * (end - start) + start);
-                
-                obj.innerHTML = currentVal.toLocaleString('ru-RU') + ' ₽';
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        // Staff Calculator Logic
-        function calculateStaff() {
-            const salaryInput = document.getElementById('salary-input');
-            const salary = Number(salaryInput.value) || 0;
-            
-            const taxes = salary * 0.43;
-            const fixedCosts = 15000; // 1C, internet, SPS
-            const totalStaff = salary + taxes + fixedCosts;
-            
-            let outsourcePrice = 25000;
-            if (salary >= 60000 && salary <= 99999) {
-                outsourcePrice = 35000;
-            } else if (salary >= 100000) {
-                outsourcePrice = 65000;
-            }
-            
-            document.getElementById('val-salary').innerText = salary.toLocaleString('ru-RU') + ' ₽';
-            document.getElementById('val-taxes').innerText = Math.round(taxes).toLocaleString('ru-RU') + ' ₽';
-            document.getElementById('val-total-staff').innerText = Math.round(totalStaff).toLocaleString('ru-RU') + ' ₽';
-            
-            document.getElementById('val-outsource-base').innerText = Math.round(outsourcePrice).toLocaleString('ru-RU') + ' ₽';
-            document.getElementById('val-total-outsource').innerText = Math.round(outsourcePrice).toLocaleString('ru-RU') + ' ₽';
-            
-            const savingPerMonth = totalStaff - outsourcePrice;
-            const savingPerYear = savingPerMonth * 12;
-            
-            const savingElement = document.getElementById('val-saving');
-            
-            if (savingPerYear > 0) {
-                savingElement.innerText = Math.round(savingPerYear).toLocaleString('ru-RU') + ' ₽';
-                savingElement.className = "text-green-600 font-black ml-2";
-            } else {
-                savingElement.innerText = "0 ₽";
-                savingElement.className = "text-gray-500 font-black ml-2";
-            }
-        }
-        
-        // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', () => {
-            calculateStaff();
-            document.getElementById('total-losses').classList.add('text-gray-500');
-            document.getElementById('total-losses').classList.remove('text-red-500');
+            
+            // Плавный скролл для якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Функция предотвращения XSS
+            function sanitizeHTML(str) {
+                return str.replace(/[^\w. ]/gi, function (c) {
+                    return '&#' + c.charCodeAt(0) + ';';
+                });
+            }
+
+            // Валидация формы
+            const form = document.getElementById('consultationForm');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const problemInput = document.getElementById('problem');
+            const successMsg = document.getElementById('successMsg');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', function(e) {
+                // Если подключите Formspree, удалите строку e.preventDefault(); чтобы форма реально отправлялась
+                e.preventDefault(); 
+                let isValid = true;
+
+                nameInput.classList.remove('invalid');
+                phoneInput.classList.remove('invalid');
+                document.getElementById('nameError').style.display = 'none';
+                document.getElementById('phoneError').style.display = 'none';
+
+                if (nameInput.value.trim().length < 2) {
+                    nameInput.classList.add('invalid');
+                    document.getElementById('nameError').style.display = 'block';
+                    isValid = false;
+                }
+
+                const phonePattern = /^[+\d\s()-]{10,20}$/;
+                if (!phonePattern.test(phoneInput.value.trim())) {
+                    phoneInput.classList.add('invalid');
+                    document.getElementById('phoneError').style.display = 'block';
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    const cleanName = sanitizeHTML(nameInput.value);
+                    const cleanPhone = sanitizeHTML(phoneInput.value);
+                    const cleanProblem = sanitizeHTML(problemInput.value);
+                    
+                    submitBtn.style.display = 'none';
+                    successMsg.style.display = 'block';
+                    form.reset();
+
+                    setTimeout(() => {
+                        submitBtn.style.display = 'block';
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // Карусель партнеров
+            const track = document.getElementById('partnersTrack');
+            const prevBtn = document.getElementById('prevPartner');
+            const nextBtn = document.getElementById('nextPartner');
+            
+            if (track && prevBtn && nextBtn) {
+                const scrollAmount = 240; 
+                
+                nextBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+                
+                prevBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+            }
         });
     </script>
 </body>
